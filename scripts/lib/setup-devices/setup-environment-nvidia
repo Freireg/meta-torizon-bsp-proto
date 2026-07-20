@@ -34,7 +34,7 @@ if [ -z "${SDKMACHINE}" ]; then
 fi
 
 _TDX_MANIFESTS="${_TDX_OEROOT}"/.repo/manifests
-_TDX_SCRIPTS="${_TDX_OEROOT}"/layers/meta-toradex-torizon/scripts
+_TDX_SCRIPTS="${_TDX_OEROOT}"/layers/meta-torizon-bsp/scripts
 
 # We can be called with only 1 parameter max (build folder)
 _TDX_BUILDDIR=${1:-build-$DISTRO}
@@ -137,7 +137,7 @@ BSPLAYERS ?= " \\
 EXTRALAYERS ?= ""
 
 BBLAYERS = " \\
-  \${OEROOT}/layers/meta-toradex-torizon \\
+  \${OEROOT}/layers/meta-torizon-bsp \\
   \${BASELAYERS} \\
   \${BSPLAYERS} \\
   \${EXTRALAYERS} \\

@@ -28,7 +28,7 @@ fi
 if ! grep -q "# Torizon" /build/conf/bblayers.conf; then 
   cat <<EOF >>/build/conf/bblayers.conf
 # Torizon
-BBLAYERS += "\${TOPDIR}/../work/meta-toradex-torizon"
+BBLAYERS += "\${TOPDIR}/../work/meta-torizon-bsp"
 # Torizon deps
 BBLAYERS += "\${TOPDIR}/../work/meta-updater"
 BBLAYERS += "\${TOPDIR}/../work/meta-virtualization"

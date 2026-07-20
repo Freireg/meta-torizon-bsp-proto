@@ -127,7 +127,7 @@ if ! grep -q "# Torizon" conf/bblayers.conf; then
   echo "Adapting conf/bblayers.conf for a Torizon OS build."
   cat <<EOF >>conf/bblayers.conf
 # Torizon
-BBLAYERS += "\${OEROOT}/sources/meta-toradex-torizon"
+BBLAYERS += "\${OEROOT}/sources/meta-torizon-bsp"
 BBLAYERS += "\${OEROOT}/sources/meta-updater"
 
 OEROOT := "\${@os.path.abspath(os.path.dirname(d.getVar('FILE', True)))}/../.."
