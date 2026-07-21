@@ -76,9 +76,10 @@ $ git clone https://git.yoctoproject.org/meta-ti -b scarthgap
 $ git clone https://git.yoctoproject.org/meta-arm -b scarthgap
 $ git clone https://git.yoctoproject.org/openembedded-core -b scarthgap oe-core
 ```
-  * Download `meta-toradex-torizon` and its dependencies:
+  * Download `meta-torizon`, `meta-torizon-bsp` and their dependencies:
 ```bash
-$ git clone https://github.com/torizon/meta-toradex-torizon.git -b scarthgap-7.x.y
+$ git clone https://github.com/torizon/meta-torizon.git -b scarthgap-7.x.y
+$ git clone https://github.com/torizon/meta-torizon-bsp.git -b master
 $ git clone https://github.com/uptane/meta-updater.git -b scarthgap
 $ git clone https://git.yoctoproject.org/meta-virtualization -b scarthgap
 ```
@@ -89,5 +90,5 @@ $ git clone https://github.com/openembedded/meta-openembedded -b scarthgap
   * Go back to our top folder `common-torizon`;
   * Create a symlink to our `setup-environment`:
 ```bash
-$ ln -s sources/meta-toradex-torizon/scripts/setup-environment setup-environment
+$ ln -s sources/meta-torizon-bsp/scripts/setup-environment setup-environment
 ```

@@ -117,14 +117,15 @@ For example:
 $ git clone https://github.com/synaptics-astra/sdk.git -b scarthgap_6.12_v2.1.0 layers
 ```
 
-  * Download `meta-toradex-torizon` and its dependencies:
+  * Download `meta-torizon`, `meta-torizon-bsp` and their dependencies:
 ```bash
 $ cd layers
-$ git clone https://github.com/torizon/meta-toradex-torizon.git -b scarthgap-7.x.y
+$ git clone https://github.com/torizon/meta-torizon.git -b scarthgap-7.x.y
+$ git clone https://github.com/torizon/meta-torizon-bsp.git -b master
 $ git clone https://github.com/uptane/meta-updater.git -b scarthgap
 ```
   * Go back to our top folder `common-torizon`;
   * Create a symlink to our `setup-environment`:
 ```bash
-$ ln -s layers/meta-toradex-torizon/scripts/setup-environment setup-environment
+$ ln -s layers/meta-torizon-bsp/scripts/setup-environment setup-environment
 ```

@@ -72,12 +72,13 @@ $ mkdir layers; cd layers
 ```bash
 $ git clone git://git.yoctoproject.org/poky -b scarthgap
 ```
-  * Download `meta-intel` and `meta-toradex-torizon`:
+  * Download `meta-intel`, `meta-torizon` and `meta-torizon-bsp`:
 ```bash
 $ git clone git://git.yoctoproject.org/meta-intel -b scarthgap
-$ git clone https://github.com/torizon/meta-toradex-torizon.git -b scarthgap-7.x.y
+$ git clone https://github.com/torizon/meta-torizon.git -b scarthgap-7.x.y
+$ git clone https://github.com/torizon/meta-torizon-bsp.git -b master
 ```
-  * Download `meta-toradex-torizon` dependencies:
+  * Download the Torizon layer dependencies:
 ```bash
 $ git clone https://github.com/uptane/meta-updater.git -b scarthgap
 $ git clone https://git.yoctoproject.org/meta-virtualization -b scarthgap
@@ -89,6 +90,6 @@ $ git clone https://github.com/openembedded/meta-openembedded -b scarthgap
   * Go back into our top folder `common-torizon`
   * Create a symlink to our `setup-environment`:
 ```bash
-$ ln -s layers/meta-toradex-torizon/scripts/setup-environment setup-environment
+$ ln -s layers/meta-torizon-bsp/scripts/setup-environment setup-environment
 ```
 

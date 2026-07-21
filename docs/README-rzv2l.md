@@ -5,9 +5,10 @@ Setup
 $ git clone https://github.com/renesas-rz/rz-community-bsp.git -b scarthgap
 $ cd rz-community-bsp
 ```
-2. Clone meta-toradex-torizon into `rz-community-bsp` folder
+2. Clone the Torizon layers into the `rz-community-bsp` folder
 ```
-$ git clone https://github.com/torizon/meta-toradex-torizon.git -b scarthgap-7.x.y
+$ git clone https://github.com/torizon/meta-torizon.git -b scarthgap-7.x.y
+$ git clone https://github.com/torizon/meta-torizon-bsp.git -b master
 ```
 3. Clone Torizon dependencies into `rz-community-bsp`
 ```
@@ -16,7 +17,7 @@ $ git clone https://git.yoctoproject.org/meta-virtualization -b scarthgap
 ```
 4. Create a symlink to our `setup-environment`:
 ```bash
-$ ln -s meta-toradex-torizon/scripts/setup-environment setup-environment
+$ ln -s meta-torizon-bsp/scripts/setup-environment setup-environment
 ```
 
 Build

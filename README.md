@@ -1,69 +1,26 @@
-meta-toradex-torizon
-====================
-Torizon OS is an embedded Linux distribution for the Torizon platform. It
-features, among other essential services, a container runtime and components
-for secure remote over-the-air (OTA) updates.
+[![Documentation](https://img.shields.io/badge/docs-online-blue)](https://freireg.github.io/)
 
-This layer provides metadata to build two distinct Torizon OS flavors:
-- **Torizon**: built on top of Toradex's BSP.
-- **Common Torizon**: built on top of BSPs from third-parties.
-
-Building Torizon OS
-===================
-To build Torizon OS, see the following article:
-
-https://developer.toradex.com/knowledge-base/build-torizoncore
-
-Building Common Torizon OS
-==========================
-Start with the machine-specific build instructions below:
-
-| SoC Vendor         | Platform / Board                            | Documentation                                | Pre-built images                                                                                                                                                                                                                                                                           |
-| :----------------- | :------------------------------------------ | :------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Intel              | x86-64                                      | [README-x86.md](./docs/README-x86.md)        | [Common Torizon OS for x86 Machines](https://developer.toradex.com/software/toradex-embedded-software/toradex-download-links-torizon-linux-bsp-wince-and-partner-demos/#torizon-os-for-x86-machines)                                                                                       |
-| NVIDIA             | Jetson Orin Nano                            | [README-nvidia.md](./docs/README-nvidia.md)  | N/A                                                                                                                                                                                                                                                                                        |
-| NXP                | i.MX 95 Verdin EVK and FRDM i.MX 93         | [README-nxp.md](./docs/README-nxp.md)        | One-off Common Torizon images available for [i.MX 95 Verdin EVK](https://artifacts.toradex.com/artifactory/legacy-oe-prod-frankfurt/i.MX95_EVKImage-Torizon_OS_7.0.0/) and [FRDM i.MX 93](https://artifacts.toradex.com/artifactory/legacy-oe-prod-frankfurt/i.MX93_FRDM-Torizon_OS_7.5.0/)|
-| Renesas            | RZ/V2L EVKIT                                | [README-rzv2l.md](./docs/README-rzv2l.md)    | N/A                                                                                                                                                                                                                                                                                        |
-| STMicroelectronics | STM32MP1/STM32MP2                           | [README-stm32mp.md](./docs/README-stm32mp.md)| N/A                                                                                                                                                                                                                                                                                        |
-| Synaptics          | Astra SL1680/Luna SL1680                    | [README-syn.md](./docs/README-syn.md)        | N/A                                                                                                                                                                                                                                                                                        |
-| Texas Instruments  | AM62x/AM62L/AM62P SK EVM and BeagleY-AI     | [README-ti.md](./docs/README-ti.md)          | [Common Torizon OS for TI Machines](https://developer.toradex.com/software/toradex-embedded-software/toradex-download-links-torizon-linux-bsp-wince-and-partner-demos/#torizon-os-for-ti-machines)                                                                                         |
-
-If your machine is not listed above or you prefer a manual setup, you can follow these generic steps:
-
-1. **Download the layers** for the `scarthgap` branch:
-
-    ```bash
-    $ git clone https://github.com/torizon/meta-toradex-torizon.git -b scarthgap-7.x.y
-    $ git clone https://github.com/uptane/meta-updater.git -b scarthgap
-    $ git clone https://git.yoctoproject.org/git/meta-virtualization -b scarthgap
-    ```
-
-2. **Set up the environment**: Source the appropriate script your BSP uses to set up the build environment.
-3. **Configure your build**:
-
-- Add the `meta-toradex-torizon` layer and its dependencies to your `conf/bblayers.conf` file.
-- Edit `conf/local.conf` to set the `MACHINE` you wish to build.
-- In the same file, set the distribution to `DISTRO='common-torizon'`.
-
-4. **Build an image**: Start building one of the available Torizon images:
-
-- `torizon-docker`
-- `torizon-minimal`
-- `torizon-podman` (**experimental**)
-
-Reporting Issues
+meta-torizon-bsp
 ================
-If you encounter any issues when using or developing Torizon OS, you can open a new issue in this repository's issue tracker or create a new Technical Support topic in the [Toradex Developer Community](https://community.toradex.com/).
+`meta-torizon-bsp` is the **BSP-adaptation layer** for Torizon OS. It holds
+everything that adapts a *vendor* BSP (Toradex's or a third party's) so it can
+boot and run Torizon OS: machine tuning, bootloader/kernel integration,
+per-vendor `bbappend`s, wic layouts, and the `setup-environment` build scripts.
 
-Contributing
-============
-You may also choose to actively fix issues and bugs or possibly port Common Torizon on new devices. For more details, see [CONTRIBUTING.md](./docs/CONTRIBUTING.md).
+It depends on the distro layer
+[`meta-torizon`](https://github.com/torizon/meta-torizon), which defines what
+Torizon OS *is*. Both layers together replace the former single
+`meta-toradex-torizon` layer.
 
-Development Process
-===================
-Torizon is maintained by the Toradex R&D team. Development happens in this repository, including issues, PRs, and discussions. This repository is then used by our internal CI/CD infrastructure.
+Documentation
+=============
+All build guides — including the per-vendor Common Torizon OS instructions — and
+project documentation are unified on the Torizon OS docs site:
 
-We also track issues, bugs and features internally. Because of this, some of the commits and pull requests made by Toradex team members may contain references to internal ticket identifiers e.g. 'Related-to: TOR-3705'.
+### 📖 https://freireg.github.io/
+
+The per-vendor guides themselves live in this repository under
+[`docs/`](./docs) (they are the canonical source that the docs site pulls in).
 
 License
 =======
