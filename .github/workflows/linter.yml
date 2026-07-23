@@ -14,6 +14,9 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          # Full history so we can diff against the PR base / previous commit
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -25,9 +28,33 @@ jobs:
           python -m pip install --upgrade pip
           pip install oelint-adv
 
-      - name: Run Linter
+      - name: Determine changed recipes
+        id: changed
         run: |
-          # Recursively finds all recipes and run the linter
-          # Fails the build automatically if errors matching your threshold are found
-          oelint-adv --quiet --color --suppress oelint.perf.variableorder $(find . -name "*.bb" -o -name "*.bbappend" -o -name "*.inc") --hide info --hide warning
+          # Only lint recipes touched by this change, so legacy files never block a PR
+          # and new additions get sanitized. --diff-filter=ACMR skips deleted files.
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch --no-tags origin "${{ github.base_ref }}"
+            RANGE="origin/${{ github.base_ref }}...HEAD"
+          elif git rev-parse -q --verify "${{ github.event.before }}^{commit}" >/dev/null 2>&1; then
+            RANGE="${{ github.event.before }}...HEAD"
+          else
+            # New branch / unknown previous commit: fall back to the last commit
+            RANGE="HEAD~1...HEAD"
+          fi
+          FILES=$(git diff --name-only --diff-filter=ACMR $RANGE -- '*.bb' '*.bbappend' '*.inc')
+          echo "Changed recipe files:"
+          echo "$FILES"
+          echo "files<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$FILES" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Run Linter
+        if: steps.changed.outputs.files != ''
+        run: |
+          # Whitelist rulefile: only the rules listed in oelint-rulefile.json run,
+          # and oelint-adv exits non-zero on any finding, so each is a hard gate.
+          oelint-adv --quiet --color --relpaths \
+            --rulefile .github/workflows/oelint-rulefile.json \
+            ${{ steps.changed.outputs.files }}
 

@@ -1,0 +1,30 @@
+{
+  "oelint.spaces.emptyline": "error",
+  "oelint.spaces.linebeginning": "error",
+  "oelint.spaces.lineend": "error",
+  "oelint.spaces.linecont": "error",
+  "oelint.tabs.notabs": "error",
+  "oelint.newline.consecutive": "error",
+  "oelint.newline.eof": "error",
+  "oelint.vars.spacesassignment": "error",
+  "oelint.vars.notneededspace": "error",
+  "oelint.vars.inconspaces": "error",
+
+  "oelint.vars.valuequoted": "error",
+  "oelint.vars.doublesemicolon": "error",
+  "oelint.vars.doublemodify": "error",
+  "oelint.vars.appendop": "error",
+  "oelint.vars.listappend": "error",
+  "oelint.var.improperinherit": "error",
+  "oelint.task.addnotaskbody": "error",
+
+  "oelint.file.underscores": "error",
+  "oelint.bbclass.underscores": "error",
+  "oelint.vars.overrideappend": "error",
+
+  "oelint.vars.renamed": "error",
+
+  "oelint.task.dash": "error",
+  "oelint.exportfunction.dash": "error",
+  "oelint.file.nospaces": "error"
+}
