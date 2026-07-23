@@ -1,0 +1,33 @@
+name: Yocto Linter
+
+on:
+  push:
+    branches: [ "main", "master", "linter-pipeline" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  lint-recipes:
+    name: Lint BitBake Recipes
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install oelint-adv
+        run: |
+          python -m pip install --upgrade pip
+          pip install oelint-adv
+
+      - name: Run Linter
+        run: |
+          # Recursively finds all recipes and run the linter
+          # Fails the build automatically if errors matching your threshold are found
+          oelint-adv --quiet --color --suppress oelint.perf.variableorder $(find . -name "*.bb" -o -name "*.bbappend" -o -name "*.inc") --hide info --hide warning
+
